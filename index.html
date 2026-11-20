@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Praćenje budžeta</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Praćenje budžeta</h1>
+      <p class="subtitle">Pregled prihoda, troškova i raspodjele po kategorijama</p>
+    </header>
+
+    <!-- Kartice sa ukupnim stanjem -->
+    <section class="summary-grid">
+      <div class="card">
+        <span>Trenutno stanje</span>
+        <h2 id="total-balance">0.00 €</h2>
+      </div>
+      <div class="card income">
+        <span>Ukupni prihodi</span>
+        <h2 id="total-income">+0.00 €</h2>
+      </div>
+      <div class="card expense">
+        <span>Ukupni rashodi</span>
+        <h2 id="total-expense">-0.00 €</h2>
+      </div>
+    </section>
+
+    <!-- Glavni dio: Forma + Raspodjela po kategorijama -->
+    <div class="main-grid">
+      <section class="panel">
+        <h3>Nova stavka</h3>
+        <form id="transaction-form">
+          <div class="form-group">
+            <label for="description">Opis</label>
+            <input type="text" id="description" placeholder="npr. Gorivo, Plaća, Teretana..." required />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="amount">Iznos (€)</label>
+              <input type="number" id="amount" step="0.01" min="0.01" placeholder="0.00" required />
+            </div>
+
+            <div class="form-group">
+              <label for="type">Tip</label>
+              <select id="type">
+                <option value="expense">Rashod (-)</option>
+                <option value="income">Prihod (+)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="category">Kategorija</label>
+            <select id="category">
+              <option value="Hrana">Hrana</option>
+              <option value="Auto i gorivo">Auto i gorivo</option>
+              <option value="Trening i zdravlje">Trening i zdravlje</option>
+              <option value="Posao i projekti">Posao i projekti</option>
+              <option value="Ostalo">Ostalo</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-primary">Dodaj stavku</button>
+        </form>
+      </section>
+
+      <!-- Vizualni pregled troškova po kategorijama -->
+      <section class="panel">
+        <h3>Troškovi po kategorijama</h3>
+        <div id="category-breakdown" class="breakdown-list">
+          <p class="empty-msg">Nema unesenih rashoda za prikaz.</p>
+        </div>
+      </section>
+    </div>
+
+    <!-- Lista transakcija + filter -->
+    <section class="panel">
+      <div class="list-header">
+        <h3>Povijest transakcija</h3>
+        <select id="filter-type">
+          <option value="all">Sve stavke</option>
+          <option value="income">Samo prihodi</option>
+          <option value="expense">Samo rashodi</option>
+        </select>
+      </div>
+
+      <ul id="transaction-list" class="transaction-list"></ul>
+    </section>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
